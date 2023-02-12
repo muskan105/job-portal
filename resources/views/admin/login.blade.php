@@ -7,25 +7,7 @@
     <form method="POST" action="{{ route('admin.doLogin') }}">
         @csrf
 
-        @if ($message = Session::get('success'))
-        <div class="text-green-700">
-            <div>
-                <span>{{ $message }}</span>
-            </div>
-        </div>
-        @endif
-
-        @if (count($errors) > 0)
-        <div class="text-red-700">
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li><span>{{ $error }}</span></li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-        @endif
+        <x-input-error :messages="$errors->get('auth')" class="mt-2" />
 
         <!-- Email Address -->
         <div class="mt-5">

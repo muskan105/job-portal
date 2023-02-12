@@ -29,15 +29,15 @@ class AuthenticatedSessionController extends Controller
 
         $is_admin = Auth::user()->is_admin;
 
-        if($is_admin){
+        if ($is_admin) {
             Auth::guard('web')->logout();
 
             $request->session()->invalidate();
 
             $request->session()->regenerateToken();
 
-            return redirect('/');
-        }else{
+            return back()->withErrors(['auth' => 'You are authorized to access this page']);
+        } else {
             $request->session()->regenerate();
 
             return redirect()->intended(RouteServiceProvider::HOME);
